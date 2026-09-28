@@ -231,3 +231,11 @@ Rules added to §2.2:
 9. *(promoted S003, PT-02)* When a tree moves, correct every reference to where its target went (live successor or archive); never delete a reference.
 10. *(promoted S003, PT-09)* Before building at scale, lock the design with the operator in structured question rounds, and record the answers verbatim as source intent.
 11. *(S003, D-23)* Before rewriting Tier 2 files wholesale, archive a complete, verified snapshot of the version being replaced.
+
+### S003 addendum: the direct route and the first rehearsal
+
+| ID | Decision | Alternatives considered | Why | Cost to reverse |
+|---|---|---|---|---|
+| D-33 | A third route, `direct`: intake → scope → the content line → delivery, with no pricing, proposal or billing; scope's gate publishes the engagement and the includes | fake commercial answers for rehearsals; skip nodes by hand | The operator: "the commericials for this run are not needed" (I-013). Scope stays because the content line is bound by the deliverables | Low |
+
+Rehearsal started: `T-20260928-gemstones-corporate-gifts` and `T-20260928-performance-marketer-xyz` (kind rehearsal, route direct) ran intake stages 1–4 for real and hold on H1 for the client's round-1 answers. Each parse found a reading the v1 examples had missed: the gemstone request never says what it wants from us (marketing, or help building the gift line), and "performance marketing" may mean paid ads, which the company does not run. Both became the first question of round 1.

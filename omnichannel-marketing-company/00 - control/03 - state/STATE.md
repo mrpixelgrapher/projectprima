@@ -5,10 +5,10 @@ Read after `00 - ENTRY.md`. Then run `python3 "00 - control/02 - tools/task.py" 
 
 ## The 30-second answer
 
-- **What this is.** Three departments that take a vague client request to paid, monthly, organic omnichannel content: `01 - commercial/` (intake, scope, pricing, proposal, billing, month review), `02 - content/` (discovery, strategy, performance, planning, writing, packaging, publishing, delivery), `03 - video-factory/` (script, shots, stills, motion, edit plan). A task moves one node at a time along a route (`00 - control/01 - law/ROUTES.md`); each client has a permanent folder in `clients/`. The design is the operator's, locked in `00 - control/04 - source-intent/06 - operator-directives-2026-09-28-design-lock.md`.
-- **Where it stands.** **Skeleton built and verified.** Every department, node and stage has its instruction; `task.py` moves tasks along both routes; both routes were run end to end on a scratch copy through the real node ENTRYs. No task has been run for a client yet.
+- **What this is.** Three departments that take a vague client request to paid, monthly, organic omnichannel content: `01 - commercial/` (intake, scope, pricing, proposal, billing, month review), `02 - content/` (discovery, strategy, performance, planning, writing, packaging, publishing, delivery), `03 - video-factory/` (script, shots, stills, motion, edit plan). A task moves one node at a time along a route (`00 - control/01 - law/ROUTES.md`: engagement, month, and direct for runs without commercials); each client has a permanent folder in `clients/`. The design is the operator's, locked in `00 - control/04 - source-intent/06 - operator-directives-2026-09-28-design-lock.md`.
+- **Where it stands.** **Skeleton built and verified.** Every department, node and stage has its instruction; `task.py` moves tasks along every route; each route was run end to end on a scratch copy through the real node ENTRYs. No task has been run for a client yet.
 - **Company phase.** **2, CAPABILITY OS BUILDING** (`00 - control/03 - state/PHASE_DERIVATION.md`): built, not yet exercised. The first real delivered task moves it.
-- **What runs next.** The operator reviews the skeleton; then the depth package (below).
+- **What runs next.** The rehearsal of both sample requests on the direct route (no commercials, I-013), then the depth package it informs (below). Nothing is blocked on the operator.
 
 ## What is built (S003)
 
@@ -24,25 +24,30 @@ Read after `00 - ENTRY.md`. Then run `python3 "00 - control/02 - tools/task.py" 
 
 ## Blocked on the operator
 
-| # | What | Why it matters | Where |
-|---|---|---|---|
-| 1 | Review the skeleton | The operator ordered "skeleton, then depth" | this session's report |
-| 2 | Fill the billing profile (legal name, trading name, address, tax registration, payment details) | Every invoice prints it; billing holds until it is filled | `01 - commercial/billing-profile.md` |
-| 3 | Confirm the image factory's root: the path was given as `.CE\…`, read as `D:\ROOT\CE\…` | Stills are delivered there | `00 - control/01 - law/HANDOFFS.md` (H4) |
-| 4 | Confirm that content work starts only after the advance invoice is paid (decision D-31, read from "setup upfront. 50% monthly advance") | It decides when discovery starts | `01 - commercial/06 - billing-advance/02 - payment/` |
-| 5 | Rates per kind of work, per client | Asked at each client's pricing, not now | `01 - commercial/03 - pricing/01 - rates/` |
+Nothing. The operator ruled that the commercial side is not a block and is not needed for this run (I-013). The billing profile, rates and payment are needed only when a real client runs on the engagement or month route; the direct route skips them.
 
-## Next action: the depth package (after the review)
+## Standing interpretations (the operator may correct any time; none blocks work)
 
-The skeleton's stage instructions are complete, but several stages point to knowledge that deserves its own reference files. In order:
+| What | Where |
+|---|---|
+| The image factory's root was given as `.CE\…`, read as `D:\ROOT\CE\…` | `00 - control/01 - law/HANDOFFS.md` (H4) |
+| On the engagement and month routes, content work starts after the advance invoice is paid (D-31) | `01 - commercial/06 - billing-advance/02 - payment/` |
+| The cadence and effort tables are starting estimates, corrected by delivery lessons (D-32) | `01 - commercial/02 - scope/` |
 
-1. **Channel crafts in depth,** one reference per channel folder in `02 - content/05 - writing/06 - channels/`: what performs on that platform, formats, a hook library, examples, the full self-check.
-2. **Creator sampling and top-post breakdowns:** how to judge each of the six dimensions (hook, structure, angle, funnel mechanics, cadence, visual), step by step (`02 - content/01 - discovery/03 - creators/`, `02 - content/05 - writing/01 - research/`).
-3. **Neuromarketing and virality references** for `02 - content/03 - performance/`: each principle with examples per channel and its honesty line.
-4. **Research method:** how to write an ARENA request that makes a complicated topic simple, and how to read a dossier into a boundary map.
-5. **Video craft:** shot grammar, Nano Banana scene prompting, cinematic motion prompting, stop-motion (`03 - video-factory/`).
-6. **Commercial templates:** a worked proposal and invoice.
-7. **Rehearsal:** run both sample requests (`gemstones-corporate-gifts`, `performance-marketer-xyz`) through intake as `--kind rehearsal`, and fix what the run shows.
+## Next action
+
+1. **Rehearsal (running).** Both sample requests are open as rehearsal tasks on the **direct** route, and hold at intake for the client's round-1 answers (`python3 "00 - control/02 - tools/task.py" status`):
+   - `T-20260928-gemstones-corporate-gifts`: questions in `01 - commercial/01 - intake/work/T-20260928-gemstones-corporate-gifts/11-intake/04-questions-round-1-for-client.md`
+   - `T-20260928-performance-marketer-xyz`: questions in `01 - commercial/01 - intake/work/T-20260928-performance-marketer-xyz/11-intake/04-questions-round-1-for-client.md`
+
+   To carry a rehearsal on, anyone can answer as the client: paste the answers into the task's `from-client/11-intake-questions-round-1-reply.md`, then `task.py resume`, and intake stage 5 continues.
+2. **The depth package,** informed by what the rehearsal shows:
+   1. **Channel crafts in depth,** one reference per channel folder in `02 - content/05 - writing/06 - channels/`: what performs on that platform, formats, a hook library, examples, the full self-check.
+   2. **Creator sampling and top-post breakdowns:** how to judge each of the six dimensions (hook, structure, angle, funnel mechanics, cadence, visual), step by step (`02 - content/01 - discovery/03 - creators/`, `02 - content/05 - writing/01 - research/`).
+   3. **Neuromarketing and virality references** for `02 - content/03 - performance/`: each principle with examples per channel and its honesty line.
+   4. **Research method:** how to write an ARENA request that makes a complicated topic simple, and how to read a dossier into a boundary map.
+   5. **Video craft:** shot grammar, Nano Banana scene prompting, cinematic motion prompting, stop-motion (`03 - video-factory/`).
+3. **Later, when a real client is priced:** a worked proposal and invoice template (`01 - commercial/`).
 
 ## Named gaps (the phase ladder's NOT BUILT minimums)
 
@@ -52,4 +57,4 @@ Authority claims, public-proof rules, rollback rules (pausing or reducing an eng
 
     python3 "00 - control/02 - tools/check_links.py"    # PASS
     python3 "00 - control/02 - tools/derive_phase.py"   # phase 2; exit 0
-    python3 "00 - control/02 - tools/task.py" status    # no tasks
+    python3 "00 - control/02 - tools/task.py" status    # two rehearsal tasks, HOLD at intake

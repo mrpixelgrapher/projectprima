@@ -26,4 +26,4 @@ Status: BUILT (session S003, 2026-09-28)
 
 ## Passes to
 
-`01 - commercial/03 - pricing`.
+`01 - commercial/03 - pricing` (engagement route). On the direct route (no commercials), `02 - content/01 - discovery`, with the engagement published by this node's gate.

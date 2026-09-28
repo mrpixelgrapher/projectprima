@@ -2,7 +2,7 @@
 
 **Purpose:** make the content the client bought. Research the client's world and the top creators in it, set a strategy with one destination online, design the content to spread and convert, plan each month, write every piece natively for every channel, package it, publish it when that is included, and deliver. Every piece drives traffic to the destination.
 
-A task enters this department only after `01 - commercial` has agreed the scope and been paid its advance. The accepted engagement (`clients/<client>/engagement.md`) is the scope: nothing is made that it doesn't list.
+A task enters this department only after `01 - commercial` has agreed the scope and been paid its advance, or, on the direct route (no commercials, operator directive I-013), after scope has fixed the deliverables. The engagement (`clients/<client>/engagement.md`) is the scope: nothing is made that it doesn't list.
 
 ## Nodes (each node folder's `00 - ENTRY.md` is its instruction)
 

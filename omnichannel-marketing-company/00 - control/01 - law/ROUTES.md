@@ -57,9 +57,31 @@ Used for every retainer month after the first. It starts from the client folder 
 | 13 | `02 - content/08 - delivery` | always |
 | 14 | `01 - commercial/07 - billing-delivery` | always |
 
+## Route: direct
+
+Used when the operator runs a request without the commercial side: no pricing, proposal or billing (operator directive, `00 - control/04 - source-intent/07 - operator-directives-2026-09-28-commercials.md`). Rehearsals and internal runs use it. Intake still understands the request, and scope still fixes the deliverables, because the content line is bound by them; scope's gate publishes the engagement and the includes that the proposal would otherwise fix.
+
+| Step | Node | Runs when |
+|---|---|---|
+| 1 | `01 - commercial/01 - intake` | always |
+| 2 | `01 - commercial/02 - scope` | always |
+| 3 | `02 - content/01 - discovery` | always |
+| 4 | `02 - content/02 - strategy` | always |
+| 5 | `02 - content/03 - performance` | always |
+| 6 | `02 - content/04 - planning` | always |
+| 7 | `02 - content/05 - writing` | always |
+| 8 | `03 - video-factory/01 - script` | includes video |
+| 9 | `03 - video-factory/02 - shots` | includes video |
+| 10 | `03 - video-factory/03 - stills` | includes video |
+| 11 | `03 - video-factory/04 - motion` | includes video |
+| 12 | `03 - video-factory/05 - edit-plan` | includes video |
+| 13 | `02 - content/06 - packaging` | always |
+| 14 | `02 - content/07 - publishing` | includes publishing |
+| 15 | `02 - content/08 - delivery` | always |
+
 ## Includes
 
 | Item | Means | Set by |
 |---|---|---|
-| `video` | The accepted proposal (or an accepted upsell) has video deliverables: the task passes through the video factory | the `Includes:` line of the `01 - commercial/04 - proposal/` or `01 - commercial/05 - month-review/` gate |
+| `video` | The accepted proposal (or an accepted upsell) has video deliverables: the task passes through the video factory | the `Includes:` line of the `01 - commercial/04 - proposal/` or `01 - commercial/05 - month-review/` gate; on the direct route, of the `01 - commercial/02 - scope/` gate |
 | `publishing` | We publish on the client's accounts: the task passes through publishing | the same |

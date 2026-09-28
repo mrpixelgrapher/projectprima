@@ -22,6 +22,9 @@ A request becomes a **task folder**. The task moves through **nodes**, one at a 
     month route (each retainer month after the first):
       month-review ─► billing (advance) ─► performance ─► planning ─► writing ─► [video] ─► packaging ─► [publishing] ─► delivery ─► billing ─► done
 
+    direct route (no commercials: rehearsals and internal runs):
+      intake ─► scope ─► discovery ─► strategy ─► performance ─► planning ─► writing ─► [video] ─► packaging ─► [publishing] ─► delivery ─► done
+
 ## Folders
 
 | Folder | What happens there |
@@ -41,7 +44,7 @@ A request becomes a **task folder**. The task moves through **nodes**, one at a 
 
 ## Operator commands (run from this folder)
 
-    python3 "00 - control/02 - tools/task.py" new --route engagement --client CLIENT --slug SLUG --label "LABEL" --via CHANNEL [--kind rehearsal] --text "REQUEST"
+    python3 "00 - control/02 - tools/task.py" new --route engagement|direct --client CLIENT --slug SLUG --label "LABEL" --via CHANNEL [--kind rehearsal] --text "REQUEST"
     python3 "00 - control/02 - tools/task.py" new --route month --client CLIENT --month YYYY-MM
     python3 "00 - control/02 - tools/task.py" status
     python3 "00 - control/02 - tools/task.py" check T-…
@@ -59,6 +62,6 @@ A request becomes a **task folder**. The task moves through **nodes**, one at a 
 2. Nodes write only inside the task folder. The exceptions: gates publish passed files to the client folder, and commercial and delivery append their ledgers (`00 - control/01 - law/TASK_CONTRACT.md` §7).
 3. Nothing is invented. Client facts come from the client, facts about the world from ARENA, and guesses become stated assumptions (`00 - control/01 - law/BRIEF_SLOTS.md`).
 4. Every piece fans out to every channel in the plan, natively, and every variant passes its own gate and names its crafted surplus (`00 - control/01 - law/OMNICHANNEL_ENFORCEMENT.md`, `PERFECTIONISM_ENFORCEMENT.md`).
-5. Nothing is made that the accepted engagement doesn't list, and content work starts only after the advance is paid (`01 - commercial/00 - ENTRY.md`).
+5. Nothing is made that the engagement doesn't list. On the engagement and month routes, content work starts only after the advance is paid (`01 - commercial/00 - ENTRY.md`); the direct route has no commercial side.
 
 Location in CE: `03 - work-projects/02 - company/02 - working-companies/omnichannel-marketing-company/`.

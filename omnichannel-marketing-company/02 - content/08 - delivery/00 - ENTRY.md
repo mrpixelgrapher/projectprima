@@ -31,7 +31,7 @@ Status: BUILT (session S003, 2026-09-28; v2 after the design lock)
 
 ## Passes to
 
-`01 - commercial/07 - billing-delivery`, which invoices the second half and closes the task.
+`01 - commercial/07 - billing-delivery`, which invoices the second half and closes the task. On the direct route (no commercials) there is no billing: this node's gate closes the task.
 
 ## Past material merged here
 

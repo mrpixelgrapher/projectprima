@@ -14,11 +14,12 @@
 2. **Choose the task slug and the label.** Task slug: 2–5 lowercase words, the business noun, then the ask noun. Label: the role or business as the request states it ("gemstone seller"); a name only if the client gave one.
 3. **Set `--via`:** how the request arrived (`chat`, `email`, `call notes`, `form`). For call notes, the file will show that the text is notes and not a quote.
 4. **Set `--kind`:** `real` for a client request; `rehearsal` for a sample used to test the nodes.
-5. **Run the operator, pasting the text unchanged.** Keep typos, missing punctuation, slang and line breaks. For long text, save it to a file first and use `--file`.
+5. **Set `--route`:** `engagement` (the default for a client: priced, proposed, billed); `direct` when the operator says the commercial side is not needed for this run (rehearsals, internal work). Routes: `00 - control/01 - law/ROUTES.md`.
+6. **Run the operator, pasting the text unchanged.** Keep typos, missing punctuation, slang and line breaks. For long text, save it to a file first and use `--file`.
 
-       python3 "00 - control/02 - tools/task.py" new --route engagement --client CLIENT --slug SLUG --label "LABEL" --via VIA --kind KIND --text "REQUEST"
+       python3 "00 - control/02 - tools/task.py" new --route ROUTE --client CLIENT --slug SLUG --label "LABEL" --via VIA --kind KIND --text "REQUEST"
 
-6. **Save attachments:** put each attachment in `from-client/`, and replace "None." under **Attachments** in `00-request.md` with one line per file.
+7. **Save attachments:** put each attachment in `from-client/`, and replace "None." under **Attachments** in `00-request.md` with one line per file.
 
 ## Output template
 

@@ -7,7 +7,7 @@ moves. Law: `00 - control/01 - law/TASK_CONTRACT.md` (the task), `ROUTES.md` (th
 order of nodes), `HANDOFFS.md` (holding for something from outside).
 
 Usage (run from the company root):
-  task.py new --route engagement --client SLUG --slug SLUG --label LABEL (--text TEXT | --file PATH)
+  task.py new --route engagement|direct --client SLUG --slug SLUG --label LABEL (--text TEXT | --file PATH)
               [--via CHANNEL] [--kind real|rehearsal]
   task.py new --route month --client SLUG --month YYYY-MM [--kind real|rehearsal]
   task.py status
