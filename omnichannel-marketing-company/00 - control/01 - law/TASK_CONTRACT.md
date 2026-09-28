@@ -1,98 +1,114 @@
 # Task Contract
 
-**Purpose:** what a task folder is, how it is laid out, its IDs, tags and states, and how it floats, branches and joins. The operator `00 - control/02 - tools/task.py` enforces the moving rules.
+**Purpose:** what a task folder is, how it is laid out, its IDs, tags and states, how it moves, and where each node may write. The operator `00 - control/02 - tools/task.py` enforces the moving rules. Version 2 (S003 design lock); version 1 is in `99 - archive/2026-09-28-pipeline-v1/00 - control/01 - law/TASK_CONTRACT.md`.
 
 ## 1. A task is one folder
 
-- **Name:** `T-YYYYMMDD-<slug>`, where the slug is 2–5 lowercase words: the business, then the ask. A child task is `T-YYYYMMDD-<slug>.<piece-slug>`.
-- **Where it lives:** in exactly one node's `work/` folder while it is being processed, and in `10 - delivery/done/` when it is finished. Its location is its state.
-- **Self-contained:** every path inside a task is relative to the task folder. The only paths that point outside are to instruction files, which are relative to the company root (e.g. `02 - discovery/02 - research/00 - ENTRY.md`).
+- **One LLM, one node at a time.** An LLM works a task at one node, using only that node's instructions and the files in the task and the client folder. When the node's gate passes, it moves the task to the next node, where the next LLM picks it up from the files alone. Nothing is carried in memory.
+- **Name:** `T-YYYYMMDD-<slug>`. For a new request, the slug is 2–5 lowercase words: the business, then the ask. For a retainer month, the slug is `<client>-<yyyy-mm>` (the month being planned).
+- **Where it lives:** in exactly one node's `work/` folder while it is being processed, and in `clients/<client>/done/` when it is finished. Its location is its state.
+- **Sequential:** a task does one node at a time, in its route's order (`ROUTES.md`). Nothing is skipped and nothing runs ahead. A node that needs something from outside (the client, the operator, ARENA, the image factory) holds the task until it arrives.
+- **Paths:** every path to a task file is relative to the task folder (`11-intake/01-parse.md`). Paths to instruction files are relative to the company root (`02 - content/05 - writing/00 - ENTRY.md`). Paths to client files start with `clients/<client>/`.
 
 ## 2. Layout
 
     T-YYYYMMDD-<slug>/
-    ├── TASK.md          identity, state, history (the operator keeps the field table and History)
+    ├── TASK.md          identity, state, route, history (the operator keeps the field table, Route and History)
     ├── CONTEXT.md       carry-forward: each node appends one section of at most 10 cited bullets
-    ├── client/          everything from the client, verbatim: answers, approvals, attachments
-    ├── 00-brief.md      child tasks only: the self-contained brief written by 04 - planning
-    ├── 01-intake/       one subfolder per node passed, files numbered in the order they were made
-    ├── 02-discovery/
+    ├── from-client/     the client's words, verbatim, as the operator relays them: answers, approvals, receipts, results data
+    ├── from-operator/   the operator's inputs: sign-offs, rates, payment confirmations
+    ├── 11-intake/       one folder per node visited (ROUTES.md names them), files numbered in the order they were made
+    ├── 12-scope/
     └── …
 
-Every node's last file in the task is `<NN-node>/gate.md`. Every gate writes it in the same five lines, so the operator and the next reader can rely on it:
+Hand-offs outside the pipeline (to ARENA, the image factory, motion generation) put the request **and what comes back** inside the node's own folder, side by side: `HANDOFFS.md`.
+
+Every node's last file in the task is `<folder>/gate.md`, written in these five lines, so the operator and the next reader can rely on it:
 
     VERDICT: PASS | HOLD
     First failed check: — | <check id, e.g. G6>
     Return to: — | <stage, e.g. 04 - questions>
-    Waiting on: — | <what is outstanding, e.g. client CQ1–CQ4; research RQ1–RQ3 (after CQ2)>
+    Waiting on: — | <what is outstanding, e.g. client answers to CQ1–CQ4>
     Notes for <next node>: none | <anything the carry-forward can't hold>
 
-On `advance`, the operator copies the `Waiting on:` line into the task's `waiting on` field.
+On `advance`, the operator copies the `Waiting on:` line into the task's `waiting on` field, and an `Includes:` line (a sixth line only the proposal and month-review gates write) into `includes`.
 
 ## 3. IDs and tags
 
 | ID | Meaning | Made at |
 |---|---|---|
-| S1… | a statement of the request | 01 - intake, parse |
-| I-A… | a reading (interpretation) of an ambiguous statement | 01 - intake, parse |
-| F1–F4 | a frame decision | 01 - intake, frame |
-| CQ1… | a client question (numbering continues across rounds) | intake, discovery |
-| RQ1… | a research question | intake, discovery, research |
-| AS1… | a stated assumption | intake, discovery |
-| L-001… | a row in a source ledger | discovery, research |
-| PR-001… | a proof run (the first delivered unit of an offer) | 10 - delivery |
+| S1… | A statement of the request | intake, parse |
+| I-A… | A reading (interpretation) of an ambiguous statement | intake, parse |
+| F1–F4 | A frame decision | intake, frame |
+| CQ1… | A client question (numbering continues across rounds and nodes) | any node that asks the client |
+| RQ1… | A research question (goes to ARENA) | intake, discovery, writing |
+| AS1… | A stated assumption | intake, discovery |
+| D1… | A deliverable (one item the client receives) | scope |
+| ST1… | A sub-task (one unit of work, with a kind and an effort) | scope |
+| L-001… | A source logged from a dossier | discovery, writing |
+| P1… | A piece in the month plan | planning |
+| INV-… | An invoice | billing |
 
 | Tag (in CONTEXT.md and intermediaries) | Meaning |
 |---|---|
-| [client] | The client said it: a quote or an answer in `client/` |
+| [client] | The client said it: a quote, or an answer in `from-client/` |
+| [operator] | The operator said it: a file in `from-operator/` |
 | [src: L-nnn] | A logged source supports it |
 | [assumed] | Not stated; we proceed on it until the client corrects it |
 | [ask: CQn] | Waiting on client question CQn |
 | [research: RQn] | Waiting on research question RQn |
 
-CONTEXT.md bullets end with the file they came from, in square brackets, e.g. [01-intake/01-parse.md].
+CONTEXT.md bullets end with the file they came from, in square brackets, e.g. [11-intake/01-parse.md].
 
 ## 4. TASK.md fields and states
 
-Fields: `id`, `kind` (real / rehearsal), `client`, `created`, `arrived via`, `node`, `status`, `waiting on`, `parent`, `children`.
+Fields: `id`, `kind` (real / rehearsal), `client` (the client folder's slug), `route`, `includes`, `created`, `arrived via`, `node`, `folder`, `status`, `waiting on`.
 
 | Status | Meaning | Set by |
 |---|---|---|
-| IN-NODE | Being worked at its node | operator (`new`, `branch`) |
-| ARRIVED | Just floated into a node | operator (`advance`) |
-| HOLD | The node's gate did not pass; the reason is in `gate.md` | a gate stage |
-| RETURNED | Sent back to an earlier node; the reason is in History | operator (`advance --to`) |
-| WAITING-CHILDREN | A parent parked at the join node until its children arrive | operator (`branch --join`) |
-| JOINED | A child absorbed into its parent at `09-packaging/pieces/`; its travel is over | operator (`join --absorb`) |
-| DONE | Filed in `10 - delivery/done/` | operator (`advance` from 10) |
+| IN-NODE | Being worked at its node | operator (`new`, `resume`) |
+| ARRIVED | Just moved into a node | operator (`advance`) |
+| HOLD | Waiting on something from outside the node; `waiting on` says what | operator (`hold`), run by the stage that needs it |
+| RETURNED | Sent back to an earlier node on its route; the reason is in History | operator (`advance --to`) |
+| DONE | Finished; filed in `clients/<client>/done/` | operator (`advance` from the last step) |
+| CLOSED | Stopped before the end (e.g. the proposal was declined); filed in `clients/<client>/done/` | operator (`close`) |
 
-`waiting on` lists what is outstanding from outside the node (e.g. `client CQ1–CQ4; research RQ1–RQ3 after CQ2`), or `—`. Each gate writes a `Waiting on:` line in its `gate.md`; `advance` copies that line into the field when the task floats, so the two can't disagree. A gate that holds sets `status` to HOLD and `waiting on` by hand.
+## 5. Moving
 
-## 5. Floating
-
-- **Forward:** `task.py advance T-…`. It checks the node's `## Writes` table against the task, and `gate.md` must say `VERDICT: PASS`. Then it moves the folder to the next node's `work/`.
-- **Backward:** `task.py advance T-… --to "<node>" --reason "…"`. Always with a reason; it is written to History.
+- **Forward:** `task.py advance T-…`. It checks the node's `## Writes` table against the task, and `gate.md` must say `VERDICT: PASS`. Then it moves the folder to the next step of the route that runs.
+- **Hold and resume:** `task.py hold T-… --on "<what>"` when a stage sends something out and must wait; `task.py resume T-… --note "<what arrived>"` when it lands. The stage then continues where it stopped.
+- **Backward:** `task.py advance T-… --to "<department>/<node>" --reason "…"`, to an earlier step of the same route only. The tool marks that node's old `gate.md` and CONTEXT section as superseded (renamed, never deleted), so the node must pass its gate again.
+- **Close:** `task.py close T-… --reason "…"` when the engagement stops (declined proposal, client withdraws). The task is filed with status CLOSED.
 - **Earlier intermediaries** are not edited after the task has left their node. To correct one, send the task back to that node.
 
-## 6. Branching and joining
+## 6. The client folder
 
-- **Branch** only at `04 - planning` (one plan → N pieces), or at intake's branch check (two brands, or two offers with different buyers).
-- `04 - planning` writes one self-contained brief per piece, at `04-planning/briefs/<piece-slug>.md`.
-- `task.py branch T-… --start "05 - research" --join "09 - packaging" --children <slug> …` refuses unless the planning gate has passed and every brief exists. Then it does three things:
-  - creates each child in `05 - research/work/`, with the brief as `00-brief.md` and a copy of the parent's CONTEXT.md;
-  - records the children in the parent;
-  - parks the parent at `09 - packaging` with status WAITING-CHILDREN.
-- **Which nodes branch and join** is declared in their ENTRY: `**Branch node:**` (a task leaves only by `branch`, never by `advance`) and `**Join node:**` (a parent may wait there). Today these are `04 - planning` and `09 - packaging`.
-- **A child** floats on its own from its start node, and may be sent back only as far as its start node. When it reaches its parent's join node, it stops there (`waiting on: join by parent T-…`) and cannot advance.
-- **Join:** `task.py join T-…` reports where each child is (READY or NOT READY). When every child has arrived, `task.py join T-… --absorb` moves each child folder inside the parent, at `09-packaging/pieces/<child-id>/`, marks it JOINED, and sets the parent back to IN-NODE. From then on, the parent holds the whole job.
+Each client has one permanent folder, `clients/<client>/`, that all of their tasks read and build on: profile, engagement, rates, brief, voice, creator library, strategy, performance design, results and history (`clients/00 - ENTRY.md`). `task.py new` creates it from `clients/00 - template/` the first time.
+
+Only a gate writes to the client folder, and only by copying a file its node produced and the gate passed (or the client approved) into the client file named in that node's ENTRY. Before a file is overwritten, the gate moves the old one to `clients/<client>/versions/<file>-<YYYY-MM-DD>.md`.
+
+**Reading an earlier node's output on a month task.** A month task skips discovery and strategy, so their files are not in it. Wherever an instruction names one of these task files and the task has no such file, read its published copy instead:
+
+| Task file named in an instruction | Read instead (month task) |
+|---|---|
+| `21-discovery/07-client-brief.md` | `clients/<client>/brief.md` |
+| `21-discovery/05-creator-library.md` | `clients/<client>/creators.md` |
+| `21-discovery/06-voiceprint.md` | `clients/<client>/voice.md` |
+| any `22-strategy/…` file | `clients/<client>/strategy.md` (the section of the same name) |
+| `23-performance/06-performance-design.md` from an earlier month | `clients/<client>/performance.md` |
 
 ## 7. Where nodes may write
 
-A node writes only inside the task folder. There is one exception: `10 - delivery` appends one row per task to the company ledgers in `10 - delivery/ledgers/`.
+| Where | Who |
+|---|---|
+| The task folder | every node, only in its own folder, `CONTEXT.md`, and (when a hand-off returns) the place `HANDOFFS.md` names |
+| `clients/<client>/` | gates only, as in §6 |
+| `01 - commercial/ledgers/` | commercial nodes: one row per event (proposal, invoice, payment, upsell, client) |
+| `02 - content/08 - delivery/ledgers/` | delivery: one row per task (delivery, lessons) |
 
 ## 8. Kinds
 
 | Kind | Meaning |
 |---|---|
-| real | A request from an actual client. Its outputs may be delivered |
-| rehearsal | A sample run that tests the nodes. It is never sent to anyone |
+| real | A request from an actual client. Its outputs may be sent |
+| rehearsal | A sample run that tests the nodes. Nothing is sent to anyone, and its ledger rows are marked `rehearsal` |

@@ -1,14 +1,15 @@
 # Instruction Standard
 
-**Purpose:** the bar every instruction file in this company must meet. Use it when you write a stage, and when you review one.
+**Purpose:** the bar every instruction file in this company must meet. Use it when you write a stage, and when you review one. Version 2 (S003 design lock: departments added to the folder convention).
 
 ## Folder convention
 
 | Level | Folder | Its `00 - ENTRY.md` says |
 |---|---|---|
-| Root | `omnichannel-marketing-company/` | What the company does, the line of nodes, how to start |
-| Node | `NN - <node>/` (01–10) | The node's one job, its stages in order, what it reads and writes in the task, its gate, where the task goes next |
-| Stage | `NN - <node>/NN - <stage>/` | **The stage instruction itself** (the seven parts below), plus a table of any other files in the folder |
+| Root | `omnichannel-marketing-company/` | What the company does, its departments, the routes, how to start |
+| Department | `NN - <department>/` (01 commercial, 02 content, 03 video factory) | The department's job, its nodes, which routes pass through them |
+| Node | `NN - <department>/NN - <node>/` | The node's one job, its stages in order, what it reads and writes in the task (its task folder is named in `ROUTES.md`), its gate, where the task goes next |
+| Stage | `…/NN - <node>/NN - <stage>/` | **The stage instruction itself** (the seven parts below), plus a table of any other files in the folder |
 | Sub-stage | a folder inside a stage (e.g. one per channel) | The same as a stage |
 
 Other files in a stage folder are only templates, prompts or reference tables that its ENTRY uses. An agent reads the ENTRY of the folder it is in, and nothing else, until that ENTRY sends it somewhere.
@@ -27,7 +28,7 @@ Other files in a stage folder are only templates, prompts or reference tables th
 
 ## Rules
 
-1. **One job per folder; one home per fact.** Shared vocabulary lives only in `00 - control/01 - law/`: slots in `BRIEF_SLOTS.md`; task layout, IDs, tags and states in `TASK_CONTRACT.md`.
+1. **One job per folder; one home per fact.** Shared vocabulary lives only in `00 - control/01 - law/`: slots in `BRIEF_SLOTS.md`; task layout, IDs, tags and states in `TASK_CONTRACT.md`; routes in `ROUTES.md`; every exchange with the outside world in `HANDOFFS.md`.
 2. **Every choice comes with its rule.** When a rule can't decide, the value is UNDECIDED and gets a deciding question: one question whose every answer maps to exactly one value.
 3. **Every open item has a route:** client, research, or a stated assumption. Nothing is left "to consider".
 4. **No invented facts.** Worked examples after intake use the gemstone sample task. Any value in an example that isn't in a real task file is marked *(illustrative)*, and must never be copied into a task.

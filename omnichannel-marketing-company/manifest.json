@@ -6,10 +6,11 @@
   "phase_previous_claim": {
     "phase": 3,
     "phase_label": "FORGE IN PROGRESS",
-    "verdict": "INVALID - not derivable from disk on 2026-09-25; see 00-control/PHASE_DERIVATION.md"
+    "verdict": "INVALID - not derivable from disk on 2026-09-25; see 00 - control/03 - state/PHASE_DERIVATION.md"
   },
-  "phase_operator": "python3 00-control/tools/derive_phase.py --write-manifest",
-  "phase_derivation": "00-control/PHASE_DERIVATION.md",
-  "active_cell_note": "no folder named forge-cell or forge-folder exists in this repo; label kept, unresolved (see 00-control/PHASE_DERIVATION.md)",
-  "phase_derived_on": "2026-09-28"
+  "phase_operator": "python3 \"00 - control/02 - tools/derive_phase.py\" --write-manifest",
+  "phase_derivation": "00 - control/03 - state/PHASE_DERIVATION.md",
+  "active_cell_note": "no folder named forge-cell or forge-folder exists in this repo; label kept, unresolved (see 00 - control/03 - state/PHASE_DERIVATION.md)",
+  "phase_derived_on": "2026-09-28",
+  "structure": "S003 design lock: departments 01 - commercial, 02 - content, 03 - video-factory; routes in 00 - control/01 - law/ROUTES.md"
 }

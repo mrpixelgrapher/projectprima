@@ -9,9 +9,9 @@ Usage (run from the company root):
 
 What counts as a reference: any text inside `backticks` that looks like a path
 (contains / or \\, or ends in .md / .py / .json). Windows separators are
-normalised to /. Each reference is resolved against the citing file's folder
-first, then (inside a task folder) against the task root, then against the company
-root. Task paths are relative to the task root (`TASK_CONTRACT.md` §1).
+normalised to /. Each reference is resolved against the citing file's folder and
+each folder above it, then (inside a task folder) against the task root, then against
+the company root. Task paths are relative to the task root (`TASK_CONTRACT.md` §1).
 
 Classes:
     RESOLVED      target exists on disk.
@@ -22,8 +22,11 @@ Classes:
     UNVERIFIED    bare name/path (no ./ or ../ prefix) that does not resolve. Usually a
                   structure name inside a contract (e.g. `synthesis/SPINE.md`). Reported,
                   never failing.
-    BROKEN        explicit relative link (./ or ../) that stays inside the company, does
-                  not resolve, and is not registered. FAILS.
+    BROKEN        a reference that does not resolve and is not registered, and is either an
+                  explicit relative link (./ or ../), a path that starts with a numbered
+                  folder (`02 - content/...`, `06 - approval/`), or a path that now exists
+                  only in an archive snapshot (stale: point it at the archive or at its
+                  successor). FAILS.
     UNREGISTERED  reference that escapes the company root and matches no register row.
                   FAILS - add a register row or correct the path.
 
@@ -72,7 +75,9 @@ def load_register() -> list[tuple[str, str]]:
 
 
 def looks_like_path(ref: str) -> bool:
-    if ref.startswith(("python", "git ")) or " --" in ref:
+    if ref.startswith(("python", "git ")) or " --" in ref or ".py " in ref:
+        return False
+    if len(ref) > 160 or " · " in ref:  # prose in backticks (a worked-example line), not a path
         return False
     return "/" in ref or "\\" in ref or ref.endswith(PATH_EXT)
 
@@ -95,12 +100,27 @@ def task_root(src: Path) -> Path | None:
     return None
 
 
+def archived_match(norm: str) -> str | None:
+    """A path that no longer resolves but exists in an archive snapshot: stale."""
+    if not re.match(r"^\d\d ?- ?[A-Za-z]", norm):
+        return None
+    archive = ROOT / "99 - archive"
+    if archive.is_dir():
+        for snap in sorted(archive.iterdir()):
+            if snap.is_dir() and (snap / norm).exists():
+                return str((snap / norm).relative_to(ROOT))
+    return None
+
+
 def classify(ref: str, src: Path, register) -> tuple[str, str]:
     norm = ref.replace("\\", "/")
     if any(ch in PATTERN_CHARS for ch in norm):
         return "PATTERN", ""
     explicit = norm.startswith(("./", "../", ".\\"))
-    bases = [src.parent] + [b for b in (task_root(src),) if b] + [ROOT]
+    # the citing folder and each folder above it (so a stage can name a sibling stage or
+    # node: `06 - approval/`), the task root (inside a task), then the company root
+    bases = [src.parent] + [d for d in src.parent.parents if ROOT in d.parents or d == ROOT]
+    bases += [b for b in (task_root(src),) if b]
     for base in bases:
         target = Path(os.path.normpath(base / norm))
         if target.exists():
@@ -112,7 +132,12 @@ def classify(ref: str, src: Path, register) -> tuple[str, str]:
     escapes = ROOT not in target.parents and target != ROOT
     if escapes:
         return "UNREGISTERED", ""
-    if explicit:
+    archived = archived_match(norm)
+    if archived:
+        return "BROKEN", f"now archived: {archived}"
+    if explicit or re.match(r"^\d\d - [a-z-]+/", norm):
+        # an explicit relative link, or a path that starts with a numbered folder
+        # (`02 - content/…`, or a sibling like `06 - approval/`), must resolve
         return "BROKEN", ""
     return "UNVERIFIED", ""
 
@@ -150,7 +175,7 @@ def main() -> int:
                 print(f"  {rid}: {by_id[rid]} reference(s)")
             continue
         for rel, ref, detail in results[cls]:
-            print(f"  {rel}  ->  `{ref}`" + (f"  [{detail}]" if detail and cls == 'RESOLVED' else ""))
+            print(f"  {rel}  ->  `{ref}`" + (f"  [{detail}]" if detail and cls in ('RESOLVED', 'BROKEN') else ""))
     failing = len(results["BROKEN"]) + len(results["UNREGISTERED"])
     print(f"\nRESULT: {'PASS' if failing == 0 else 'FAIL'} ({failing} failing reference(s))")
     return 0 if failing == 0 else 1

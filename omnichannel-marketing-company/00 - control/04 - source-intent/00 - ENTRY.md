@@ -9,3 +9,4 @@
 | `03 - operator-directives-2026-09-28.md` | 2026-09-28 | The assembly-line framing (superseded in part by 04) |
 | `04 - operator-directives-2026-09-28-pipeline.md` | 2026-09-28 | First principles: a vague client request becomes a task folder that floats through nodes |
 | `05 - operator-directives-2026-09-28-restructure.md` | 2026-09-28 | Skill-grade instruction files; merge the past folders into the flow; no stubs |
+| `06 - operator-directives-2026-09-28-design-lock.md` | 2026-09-28 | The design lock: the three departments, sequential routes, pricing and billing, ARENA and the image factory as hand-offs, the client folder, organic performance, the video factory |
