@@ -1,101 +1,63 @@
-# ENTRY - Omnichannel Marketing Company
+# Omnichannel Marketing Company
 
-## Parent
+## What this company does
 
-Parent: `.\03 - work-projects\02 - company\03 - company-creation-protocol`
+A client sends a vague request, for example *"I'm into precious gemstones selling and want to like build corporate gifts as a sub branch"*. This folder turns it into a complete omnichannel content package: research-backed long-form pieces, a channel-native variant of each for every channel in the plan, visual briefs, and a publishing schedule. It is delivered as one paste-ready package.
 
-This is a generated attempt, not a live company.
+## Who sends requests
 
-## Ancestry
+Founders and small-business owners, and marketers acting for their own clients, who want marketing done. Usually they have no marketing know-how and no clear brief. The line is built to work from one vague sentence.
 
-- Parent: `.\03 - work-projects\02 - company\03 - company-creation-protocol`
-- Root map: `.\02 - WORKSPACE_META\06 - human-readable\CANONICAL_PATHS.md`
+## How it works
 
-## Read Order
+A request becomes a **task folder**. The task floats through ten **nodes**. Each node does one job, reads what earlier nodes wrote into the task, and writes its own files into the task. A task leaves a node only when that node's gate passes. At `04 - planning` the task **branches**, one child task per content piece. At `09 - packaging` the children are **joined** back into the parent. The finished task folder holds everything, and is filed in `10 - delivery/done/`.
 
-1. `manifest.json`
-2. `00-control/status.md`
-3. `00-control/asset-intake.md`
-4. The exact file named by the user's task
+    request ─► 01 intake ─► 02 discovery ─► 03 strategy ─► 04 planning ─┬─► 05 research ─► 06 drafting ─► 07 review ─► 08 shaping ─┐
+                                                                         │      (one child task per piece; FAIL at 07 goes back)   │
+                                                                         └────────────── parent waits ──────────► 09 packaging ◄───┘
+                                                                                                                    │
+                                                                                                        10 delivery ─► done
 
-## Status
+## Folders
 
-- Folder class: generated attempt
-- Promotion status: not promoted
-- Active folder: `forge-folder`
+| Folder | What happens there |
+|---|---|
+| `00 - control/` | The law every node obeys, the operator tools, company state, the operator's source intent, and registers |
+| `01 - intake/` | The vague request becomes a task that knows what was said, what it could mean, and what is missing. Round-1 client questions go out |
+| `02 - discovery/` | Client answers, research and the client's own writing become a verified client brief, with every slot filled |
+| `03 - strategy/` | Positioning, messages, channel plan and objectives, approved by the client |
+| `04 - planning/` | The content plan, one brief per piece, then the branch into child tasks |
+| `05 - research/` | Per piece: research the topic out to its full boundary, then compress it into a spine |
+| `06 - drafting/` | Per piece: draft from the spine, then re-voice the draft as the client |
+| `07 - review/` | Per piece: the quality gate. PASS floats the piece on; FAIL sends it back with the defect named |
+| `08 - shaping/` | Per piece: decomposition seeds, the hub version, one variant per channel, visual briefs, a gate per variant |
+| `09 - packaging/` | Join the pieces into one publish kit, the schedule, and the client package |
+| `10 - delivery/` | Hand over, record what happened, write lessons into the ledgers, file the task |
+| `99 - archive/` | Past material, now merged into the nodes above. Read-only |
 
-## Runtime Law
+## Start here
 
-- Do not route live Company work here unless this attempt is explicitly named.
-- Do not treat generated scaffold files as proof of a live operating company.
-- Buyer-facing asset work remains blocked at `00-control/asset-intake.md` if any required field is unresolved.
-- Promotion or rebuild must go through `../../01 - meta-company-template/00 - control/10 - raw-idea-intake/<idea-id>/raw_idea_input.md`.
+- **A new request:** open `01 - intake/00 - ENTRY.md`.
+- **Resuming work:** read `00 - control/03 - state/STATE.md`, then run `python3 "00 - control/02 - tools/task.py" status`.
 
-## Company Map (appended 2026-09-25, session S001)
+## Operator commands (run from this folder)
 
-Added because the scaffold and the departments had no shared index (handoff §7.3, gap 10). The Read Order above still applies. This section adds where everything is and what runs next.
+    python3 "00 - control/02 - tools/task.py" new --slug SLUG --client LABEL --via CHANNEL [--kind rehearsal] --text "REQUEST"
+    python3 "00 - control/02 - tools/task.py" status
+    python3 "00 - control/02 - tools/task.py" check T-…
+    python3 "00 - control/02 - tools/task.py" advance T-…
+    python3 "00 - control/02 - tools/task.py" advance T-… --to "06 - drafting" --reason "…"
+    python3 "00 - control/02 - tools/task.py" branch T-… --start "05 - research" --join "09 - packaging" --children SLUG …
+    python3 "00 - control/02 - tools/task.py" join T-… [--absorb]
+    python3 "00 - control/02 - tools/check_links.py"
+    python3 "00 - control/02 - tools/derive_phase.py"
 
-### Cold-boot order
+## Rules of the line
 
-1. `manifest.json`, then `00-control/status.md` (Read Order steps 1–2 above).
-2. `00-control/STATE.md`: the derived phase, what is real and what is placeholder, the gap list, and the exact next action.
-3. Run the two operators and compare their output with STATE.md:
-   - `python3 00-control/tools/derive_phase.py` re-derives the phase from disk. Exit 3 means the manifest overclaims.
-   - `python3 00-control/tools/check_links.py` checks that every path reference resolves or is registered. Exit 1 means a link is broken.
-4. Enter only the folder STATE.md names. `meta_workspace.md` explains the repeatable process and why decisions were made.
+1. A task leaves a node only when every file in the node's `## Writes` table exists in the task, and the node's `gate.md` says `VERDICT: PASS`.
+2. Nodes write only inside the task folder. The one exception: `10 - delivery` appends to its ledgers.
+3. Nothing is invented. Client facts go to the client, facts about the world go to research, and guesses become stated assumptions (`00 - control/01 - law/BRIEF_SLOTS.md`).
+4. Every public piece fans out to every channel in the plan. Each variant passes its own gate and names its crafted surplus (`00 - control/01 - law/OMNICHANNEL_ENFORCEMENT.md`, `00 - control/01 - law/PERFECTIONISM_ENFORCEMENT.md`).
+5. Nothing is sold before it has been made, checked and delivered once. The first task of any new offer is a free proof run (`10 - delivery/02 - record/00 - ENTRY.md`).
 
-### Folders
-
-Two tracks share this folder. **Pipeline** folders hold this company's own build state. **Department** folders hold reusable operating methodology that the pipeline calls. Their numbers overlap (`01-foundation` vs `01 - writing-department`) because the departments kept their original names, which keeps their sibling-relative links working (decision D-02 in `meta_workspace.md`).
-
-| Folder / file | Track | What it is | State on 2026-09-25 |
-|---|---|---|---|
-| `00-control/` | control | status, state, phase derivation, operators (`tools/`), carbon input forms | real |
-| `00-control/source-intent/` | control | the handoff and the operator directives, verbatim (Tier 1) | real |
-| `01-foundation/` | pipeline | customer, problem, value proposition | placeholder |
-| `02-sourcing/` | pipeline | research plan, input registry, source ledger, dossiers | question bank only |
-| `03-setup/01 - outputs/` | pipeline | P1 positioning, P2 pitch stack, P3 website surface, P4 channel copy | stubs; invalid until the knowledge-work override is satisfied |
-| `04-interface/` | pipeline | execution sequence | plan, not exercised |
-| `05-convergence/` | pipeline | objective function | placeholder |
-| `01 - writing-department/` | department | research-first article engine: rules, contract, 5 stage prompts | substantive, not exercised (0 research folders) |
-| `02 - content-distribution/` | department | Substack hub plus LinkedIn, Twitter/X + Threads and Facebook layers; templates | substantive, not exercised (0 drafts) |
-| `03 - architecture-governance/` | governance | registry, dependency graph, doctrine enforcement, 16 specs, instruction-gap and external-dependency registers | substantive |
-| `meta_workspace.md` | control | the repeatable meta process, plus the findings and decisions log | real |
-
-Future pipeline folders are declared by the gate table in `00-control/tools/derive_phase.py`: `06 - capability/`, `07 - acquisition/`, `08 - proof/`, `09 - delivery/`, `10 - quality/`, `11 - client-state/`, `12 - upgrade/`, `13 - memory/`, `14 - governance/`, and `00-control/contracts/`. Create each one when its build phase starts, not before.
-
-### How the tracks connect
-
-    02-sourcing (dossiers) ──► 01-foundation ──► 03-setup outputs (compiled, never drafted cold)
-          ▲
-          │ Stage 01 boundary discipline reused for business research
-          │
-    01 - writing-department ──► 02 - content-distribution ──► PUBLISH_KIT (one per article)
-      research → spine → draft → voice → gate    Substack hub → channel-native variants
-
-    03 - architecture-governance: the rules every folder obeys, plus the registers of what is still missing
-
-- **Research.** Business research (buyer, market) lives in `02-sourcing/`. Article research lives in the writing department's `research-[slug]/` folders. Both follow the boundary discipline of `01 - writing-department/01 - prompt-library/01 - PROMPT_boundary_research.md`.
-- **Positioning and site copy** in `03-setup` are compiled from dossiers, never drafted cold (handoff §2.4).
-- **Public content** flows from writing to distribution and ends in a PUBLISH_KIT (`03 - architecture-governance/02 - doctrine-enforcement/OMNICHANNEL_ENFORCEMENT.md`).
-- **External CE references** inside department files resolve through `03 - architecture-governance/EXTERNAL_DEPENDENCY_REGISTER.md`. Open instruction gaps are listed in `03 - architecture-governance/INSTRUCTION_GAP_REGISTER.md`.
-- **Status label.** "Generated attempt, not a live company" (above) stays true until `derive_phase.py` derives phase 8, LIVE GOVERNED OPERATION. The promotion route named in the Runtime Law lives outside this repo (register X-11) and cannot run here, so until it can, the derived phase is the status authority.
-
-## Company Map — Amendment (appended 2026-09-28, session S002)
-
-The folder structure is now read as **one assembly line**: `00-control/ASSEMBLY_LINE.md`. Each station does one job and reads from the stations before it; nothing runs ahead of an unfinished earlier station (input I-007). Cold-boot step 3 gains a third operator:
-
-- `python3 00-control/tools/line_status.py` shows where the line stands. Exit 1 means something skipped ahead.
-
-New since S001:
-
-| Folder / file | Track | What it is | State on 2026-09-28 |
-|---|---|---|---|
-| `00-control/ASSEMBLY_LINE.md` | control | The station table the line operator reads | real |
-| `00-control/carbon-input/CARBON_INPUT_FORM-002.md` | control | The friend's four open facts | OPEN |
-| `01-foundation/author-voice.md` | pipeline, station S1a | Whose voice: name, field, way of talking | PARTIAL: waiting on the friend |
-| `01-foundation/customer.md` | pipeline, station S1b | The buyer type (fixed) plus one real buyer | PARTIAL: waiting on the friend, and on research lane L1 |
-| `01-foundation/problem.md`, `value-proposition.md`, `offer.md` | pipeline, station S2 | The need, the mechanism, and the offer order (free proof run first) | PARTIAL |
-| `02-sourcing/` | pipeline | Research plan, input registry, source ledger, dossier D-001 (staged) | real |
-| `02 - content-distribution/CHANNEL_ACTIVATION.md` | department | Substack hub and LinkedIn on (pilot); everything else off | real |
-| `04 - media-department/` | department, side station M | The image station: intake built, no producer | NOT OPERATIONAL |
+Location in CE: `03 - work-projects/02 - company/02 - working-companies/omnichannel-marketing-company/`.
