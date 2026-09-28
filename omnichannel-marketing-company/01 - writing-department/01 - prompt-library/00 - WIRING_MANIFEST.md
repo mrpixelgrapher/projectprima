@@ -78,3 +78,7 @@ To execute the first piece through this engine:
 7. Run Stage 04 → fills `outputs/ARTICLE.md`
 8. Run Stage 05 → PASS or named FAIL
 9. On PASS: decompose to content-distribution for platform variants
+
+## Author Input For This Company (appended 2026-09-28, session S002)
+
+The chain's INPUT "author name (+ 3-5 writing samples for voiceprint)" is read from `.\..\..\01-foundation\author-voice.md`. The voiceprint that Stage 04 builds from those samples lands in `.\..\voiceprints\[author-slug].md`. No stage runs against a placeholder author: while that file's name or samples are CARBON-BLOCKED, station S1a is PARTIAL and no piece may start (`.\..\..\00-control\ASSEMBLY_LINE.md`).

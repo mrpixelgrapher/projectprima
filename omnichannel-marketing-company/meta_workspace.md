@@ -39,6 +39,9 @@ A work unit (an article, a client audit, a dossier) is a **folder**, and the fol
 3. Correct a path when a local target exists. Otherwise register it. Never delete a reference.
 4. Edit Tier 2 files byte-preservingly (their line endings are mixed). Append new sections at the end with a dated heading.
 5. "Resolved" means traced to evidence, not "has text in it".
+6. *(promoted S002, PT-04)* Before trusting a new gate's FAIL, test it on fixtures in both directions, including the case where a cap or exemption could mask a violation.
+7. *(promoted S002, PT-06)* Any description of the disk — a handoff, or the operator's own picture of the line — is a hypothesis. Check it against the files before acting on it, and report where it differs.
+8. *(S002)* The line decides what may run next: M6 picks work from the first station that isn't FILLED (`python3 00-control/tools/line_status.py`). Work that produces no content, such as capability cards, may run beside it.
 
 ---
 
@@ -82,6 +85,42 @@ Order note: the handoff's Phase A says to write PHASE_DERIVATION and STATE "befo
 - Partial: the channel-matrix and 30-day precedence resolutions are written down (G-C01, G-C02) but not yet exercised on a real kit.
 - Open: everything tagged OPEN or HUMAN in the gap register; the research dossier (next session).
 
+### S002 — 2026-09-28
+
+**Input (M0).** The operator's assembly-line directive, stored verbatim in `00-control/source-intent/03 - operator-directives-2026-09-28.md` and logged as I-001 to I-007 in `02-sourcing/input_registry.md`. It decides the friend's role, fixes the buyer type, sets the offer order, sets the platform order, rules on the image gap and on first-piece linking, and states the line law.
+
+**What was done, in order:**
+1. Checked the directive against disk (M2) → findings F-11 and F-12.
+2. Archived the three placeholder foundation files (`01-foundation/META/archive/2026-09-28-placeholder/`).
+3. Wrote the input registry, the source ledger (disk evidence only), the research plan and dossier D-001 (staged, not run).
+4. Wrote five claim files in `01-foundation/`, with every bullet tagged.
+5. Wrote `00-control/ASSEMBLY_LINE.md` and `00-control/tools/line_status.py`. The operator's first run exposed two deadlocks (F-14), which were fixed. Fixture tests exposed a masked violation (F-15), which was fixed.
+6. Extended `derive_phase.py`: the new markers, the two new foundation files, and a paid-offer gate.
+7. Built the image-station intake (`04 - media-department/`) and `02 - content-distribution/CHANNEL_ACTIVATION.md`.
+8. Appended wiring, waiting and exemption sections to 18 Tier 2 files.
+9. Staged F-002 and recorded the answers in F-001.
+10. Updated the gap register (64 gaps), `PHASE_DERIVATION.md`, `STATE.md` and this file.
+
+S001 gap-register counts, for the record: 55 gaps (18 fixed, 13 registered or resolved, 17 open, 7 human).
+
+**Findings:**
+
+| ID | Finding | Evidence | Why it matters | Action |
+|---|---|---|---|---|
+| F-11 | The operator's model said the downstream folders read a voice file that holds "the wrong name". On disk, the writing chain had an **empty** author slot, and the earlier project's identity sat inline in the platform and governance defaults | `01 - writing-department/01 - prompt-library/00 - WIRING_MANIFEST.md`; the LinkedIn contract's vertical list | "Just fill the file" only works once every reader actually reads the file | Created `01-foundation/author-voice.md`, with a one-line pointer in each of its 6 readers (G-C17) |
+| F-12 | The operator said "some" platforms need an image. On disk, all of them do, including both pilot channels | source ledger L-006 | Without a producer the pilot can reach text-complete, not complete | Every slot marked WAITING; the decision is surfaced in `00-control/STATE.md` (G-C18) |
+| F-13 | Taken literally, "the first piece is excused, later pieces follow the rule" still leaves piece 2 unable to meet a ≥ 2-link minimum | Substack hub contract §4 | A rule that can't be met stalls the second piece the same way it stalled the first | The one-line exemption counts only earlier pieces that exist (G-C19) |
+| F-14 | On its first run, the line operator found two deadlocks: the price waits on PR-001, but PR-001 waits on S2; and S1b's own research was scheduled after S1 | first `line_status.py` output | A strict gate plus a rule that schedules something later equals a line that can never move | `[DEFERRED: …, per I-nnn]` (listed, not blocking; must cite its rule). A station's research runs inside that station (G-M14) |
+| F-15 | Fixture T4: the S7 image cap turned "a kit exists before the gate" into PARTIAL, which hid a real skip-ahead | fixture run T4 | A cap written for honesty masked a violation | Units are judged on raw output before any cap. Output ahead of an unfilled station is a violation |
+| F-16 | "Paid after one proven run" vs the capability law ("market only `live_capability`", which needs ≥ 2 reconciled runs) | handoff §2.5 | Obeying one rule literally would break the other | The first paid audit is sold framed as validated; it becomes live after the second reconciled delivery (G-C20) |
+| F-17 | `04-interface/execution-sequence.md` ordered the website and pitch before any proof | that file | It contradicts I-003 | Marked superseded (G-C21) |
+| F-18 | The phase advanced to 2 while the line is stuck at S1 | the two operators' output | A cold reader could read "phase 2" as progress on content | Both are recorded side by side in `00-control/PHASE_DERIVATION.md` |
+
+**Three-tier receipt (S002):**
+- **Verified:** the line operator reports stuck at S1, no skip-ahead, exit 0, and was fixture-tested on 5 cases. `derive_phase.py` gives phase 2 and the manifest agrees; the paid-offer gate is CLOSED. `check_links.py` passes. The gap register recount was scripted from its rows. Every Tier 2 change is an append or a path fix (`git diff --numstat`).
+- **Partial:** the identity binding and channel activation are written and pointed to, but no unit has read them yet.
+- **Open:** F-002 (the friend); D-001 not run; Phase C not built; the image producer decision.
+
 ---
 
 ## 4. Decision log
@@ -100,10 +139,20 @@ Order note: the handoff's Phase A says to write PHASE_DERIVATION and STATE "befo
 | D-10 | "Live company" = derived phase 8 (LIVE GOVERNED OPERATION), because the ENTRY's promotion route is outside this repo | phase 7; operator decides | Phase 8 is the Phase Map's own "live" label. Open to operator override (G-X11) | Low |
 | D-11 | Tier 2 edits = new dated sections appended at the end of the file | inline insertions | Keeps original prose intact; makes each session's changes auditable in one place | — |
 | D-12 | New files use LF and company-root-relative forward-slash paths. Existing files keep their own endings and `.\` style | convert everything | Converting would rewrite every Tier 2 file (F-03). `check_links.py` resolves both styles | Low |
+| D-13 | The voice file is `01-foundation/author-voice.md` (station S1a). Its readers are bound by one-line pointers; no folder is rebuilt | edit every reader to carry the name | The operator asked for exactly one file to hold the truth (I-001). Pointers make that literally true | Low |
+| D-14 | The first spoke is LinkedIn | Twitter/X | It was read off the wiring: week-1 pairing, core-insight seed, buyer type, doctrine set with machinery (`02 - content-distribution/CHANNEL_ACTIVATION.md`) | Low: change the Activation cells |
+| D-15 | Piece folders: `01 - writing-department/03 - research/research-[slug]/`. Kits: `02 - content-distribution/06 - publish-kits/[slug]/PUBLISH_KIT/` | decide at first use | The line's station table needs real paths to be checkable. The locations are the S001 proposals | Low |
+| D-16 | The image station is a numbered department (`04 - media-department/`), built intake-first. A producer exists iff `PRODUCER.md` exists | put the briefs inside each layer; wait for a producer before designing anything | The registry models Media as a department. One switch file makes "operational" checkable | Low |
+| D-17 | Marker grammar: `[src: L-/I-nnn]`, `[dossier: …, PENDING]`, `[CARBON-BLOCKED: …]`, `[WAITING: …]`, `[DEFERRED: until …, per I-/L-nnn]` | a single "blocked" tag | The line has to tell apart what can be looked up, what only a person knows, what depends on a system, and what a rule deliberately schedules later | Low |
+| D-18 | Line strictness: company stations may be PARTIAL (rulings plus named gaps). Units are strict: no output ahead of an unfilled station | strict everywhere | Strict everywhere would have forbidden recording the operator's own rulings. Units are where skipping ahead produces false content | Low |
+| D-19 | S1a needs the name, the field **and** the way of talking. Account handles moved to `CHANNEL_ACTIVATION.md` (read at S7) | name and field only | The operator's own words: "a real name, a real field, a real way of talking" before a single sentence. Handles aren't needed to write | Low |
+| D-20 | The first paid audit is sold framed as validated; it goes live after a second reconciled delivery | sell as an established service after one run; stay free until two runs | Reconciles I-003 with capability law §2.5 without breaking either | Low |
+| D-21 | Prices and proof permissions are not asked in F-002 | ask them now | I-003 defers prices to after PR-001; there is nothing to grant permission for yet | — |
+| D-22 | D-001 is staged, not run, this session | run lane L1 now | This session's package was the early-station pass. Lane L1 is the first item in the next action list | — |
 
 ---
 
-## 5. Patterns seen (candidates, not promoted)
+## 5. Patterns seen (candidates; promoted rows are marked)
 
 A pattern is promoted to an orientation rule (and later to `13 - memory/patterns-to-promote.md`) only after it has been seen in **two or more** real instances (handoff §3, phase 9: "promote only proven patterns").
 
@@ -112,6 +161,8 @@ A pattern is promoted to an orientation rule (and later to `13 - memory/patterns
 | PT-01 | A doctrine labelled ENFORCED is often not propagated. Check its "Affected" list against the files it names | 1 (S001: gate 7, surplus lines) | candidate |
 | PT-02 | Extracted subtrees carry phantom references. Fix with a register the checker reads, not with deletion | 1 (S001) | candidate |
 | PT-03 | Mixed line endings turn small edits into whole-file rewrites. Always edit byte-preservingly | 1 (S001) | candidate |
-| PT-04 | A new gate must be fixture-tested in both directions before its FAIL is trusted | 1 (S001: `derive_phase.py`) | candidate |
+| PT-04 | A new gate must be fixture-tested in both directions before its FAIL is trusted | 2 (S001: `derive_phase.py`; S002: `line_status.py` T4 caught a masked violation) | **promoted S002** → §2.2 rule 6 |
 | PT-05 | Slot checks based on text presence pass vacuously. "Resolved" must mean traced to evidence | 1 (S001: `execute.md` / `asset-intake.md`) | candidate |
-| PT-06 | A handoff snapshot drifts from disk within hours. Verify before acting (P11) | 1 (S001: F-01) | candidate |
+| PT-06 | Descriptions of the disk drift from it: verify before acting (P11) | 2 (S001: handoff snapshot F-01; S002: the operator's identity and image model, F-11 and F-12) | **promoted S002** → §2.2 rule 7 |
+| PT-07 | A new operator finds design flaws in the rules around it on its first run. Build and run it before polishing the prose | 1 (S002: F-14) | candidate |
+| PT-08 | A strict gate needs a "deferred by rule" state, or it deadlocks with any rule that schedules something later | 1 (S002: F-14) | candidate |

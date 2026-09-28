@@ -108,3 +108,7 @@ One ethical line, stated plainly so CE enforces it: this stage is for making gen
 - Requires: a `voiceprints/[author].md` in the writing-department (CE: create this folder on install).
 - Lands in: writing-department `OUTPUT_CONTRACT.md` → `outputs/ARTICLE.md`.
 - Previous: `03 - PROMPT_draft_apex.md`. Next: `05 - PROMPT_perfection_gate.md`.
+
+## Author Binding (appended 2026-09-28, session S002)
+
+The named author for this company is the one in `.\..\..\01-foundation\author-voice.md`. Part A's SAMPLES are the samples listed there. Until they exist, Part A cannot run and this stage is BLOCKED.

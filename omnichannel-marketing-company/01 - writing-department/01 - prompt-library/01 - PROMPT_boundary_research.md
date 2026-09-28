@@ -85,3 +85,7 @@ The saturation self-check is the diamond's lower gate. A NO is the system workin
 - Lands in: writing-department `OUTPUT_CONTRACT.md` → research folder `sources/` + `observations/`.
 - Research-brief machinery if running through Carbon/Arena: `.\..\..\..\03 - company-creation-protocol\01 - carbon-interface\CARBON_INTERFACE_PROTOCOL.md` (the 10-criterion dossier optimizer) and the lexbridge research templates (`.\..\..\lexbridge\02 - research\02 - templates\research-brief-template.md`).
 - Next stage: `02 - PROMPT_synthesis_middle.md`.
+
+## Slot Binding (appended 2026-09-28, session S002)
+
+`{{DOMAIN}}` is the field in `.\..\..\01-foundation\author-voice.md`. `{{TOPIC}}` and `{{ANGLE}}` come from the piece's own request, which is the unit's intake (`.\..\..\00-control\ASSEMBLY_LINE.md`).

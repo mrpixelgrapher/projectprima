@@ -82,3 +82,9 @@ A Twitter+Threads derivative pair is complete only when all of the following are
 ## Update rule
 
 When the output contract changes, update this file first, then update `.\WORKFLOW.md` if the workflow steps change, then update `.\..\WORKING_RULES.md` if a department rule is affected, then update `.\..\00 - ENTRY.md` if ancestry changes.
+
+## Local Status (appended 2026-09-28, session S002)
+
+- Activation: **OFF** until the pilot exit in `.\..\CHANNEL_ACTIVATION.md` holds. This layer opens next, Twitter/X first.
+- Check 10 (visual assets): WAITING-ON-PRODUCER once the layer is on (`.\..\..\04 - media-department\VISUAL_BRIEF_CONTRACT.md`).
+- Author: `.\..\..\01-foundation\author-voice.md`.

@@ -1,82 +1,79 @@
 # Phase Derivation
 
-Tier 3 report: regenerate freely. Derived: 2026-09-25, session S001.
+Tier 3 report: regenerate freely. Last derived: 2026-09-28, session S002.
 Operator: `python3 00-control/tools/derive_phase.py`. If this file and the script disagree, the script wins and this file is stale.
 
 ## Verdict
 
-| | Phase | Label | Source |
+| When | Claimed | Derived | Note |
 |---|---|---|---|
-| Claimed (before S001) | 3 | FORGE IN PROGRESS | `manifest.json` as uploaded (kept under `phase_previous_claim`) |
-| **Derived** | **1** | **FOUNDATION ACTIVE** | `derive_phase.py`, table below |
+| Before S001 | 3, FORGE IN PROGRESS | — | an inherited label (kept in `manifest.json` under `phase_previous_claim`) |
+| S001, 2026-09-25 | — | 1, FOUNDATION ACTIVE | 7 of 8 phase-1 minimums missing |
+| **S002, 2026-09-28** | — | **2, CAPABILITY OS BUILDING** | all 10 phase-1 minimums PASS; the first phase-2 minimum fails |
 
-**Downgraded by 2 phases.** Under the anti-inflation law (handoff §3.1), a claimed phase is invalid while any lower phase's minimum is missing. `manifest.json` now carries phase 1. The script writes it (`--write-manifest`), so don't hand-edit the phase fields.
+`manifest.json` carries phase 2. It was written by the script (`--write-manifest`); don't hand-edit it.
 
-"FORGE IN PROGRESS" is not a label on the Phase Map. It named a CE build cell, not a readiness level.
+## Phase 2 does not mean the line is moving
 
-## Why 1: the judgment the script cannot make
+Two operators measure two different things, and both are true today:
 
-- **Not phase 0.** Phase 0's trigger is "cannot state its service thesis and buyer path from files". `00-control/status.md` does state them, at thesis level: offer, buyer path, leverage actor, proof structure. The company is past phase 0.
-- **Phase 1's trigger matches.** "Core business logic exists but capability / acquisition / delivery / research structures are not represented by governed artifacts." The departments hold real, governed methodology, but none of it has been run for this company. Nothing on disk turns it into capability cards, a pipeline, an intake or a delivery record (verified: 0 `research-*` folders, 0 `drafts/` folders, 0 `PUBLISH_KIT/` folders, 0 ledgers).
-- **Phase 1 cannot exit.** 7 of its 8 minimums fail: the three foundation files carry no evidence-tagged claims, and the research plan, input registry, source ledger and any dossier are all missing. The one that passes is the carbon input form, `00-control/carbon-input/CARBON_INPUT_FORM-001.md`, staged this session.
-- **Why the old claim of 3 was invalid.** Every phase-2 minimum is missing (capability cards, promotion gates, validation-run template, capability ledger), and so is every phase-3 minimum (pipeline ledger, sequence rules, proof system, authority claims, public-proof rules, compiler contract).
+| Operator | Question | Answer on 2026-09-28 |
+|---|---|---|
+| `derive_phase.py` | Has the company **named** everything it is missing, and staged a packet for each gap? (Phase 1's exit: "foundation artifacts + named source packets for missing proof and inputs") | **Yes.** Every foundation claim carries evidence or a named waiting marker. Research dossier D-001 is staged and forms F-001 and F-002 exist, so phase 1 exits |
+| `line_status.py` | Has each early station actually been **filled**? | **No.** The line is stuck at S1 (who: voice, and who: buyer), waiting on the friend (F-002) and on research lane L1 (`00-control/ASSEMBLY_LINE.md`) |
 
-## Per-phase exit minimums (script output, 2026-09-25)
+Naming a gap is what phase 1 requires; filling it is what the line requires. Phase 2's work (capability cards, promotion gates, capability ledger) describes what the line can and cannot do yet. It produces no content, so it can proceed without skipping ahead on the line.
+
+## Why 2: the judgment the script cannot make
+
+- **Phase 1 exits honestly.** Every tag was checked by hand as well as by script:
+  - `[src: …]` tags point at real rows in `02-sourcing/source_ledger.md` (L-001 to L-010, on-disk evidence only) or `02-sourcing/input_registry.md` (I-001 to I-007, the operator's rulings).
+  - `[CARBON-BLOCKED: F-002 Qn]` tags point at questions staged in `00-control/carbon-input/CARBON_INPUT_FORM-002.md`.
+  - `[dossier: D-001 Qn, PENDING]` tags point at queries written in `02-sourcing/01 - dossiers/D-001-buyer-and-problem/DOSSIER.md`.
+  - `[DEFERRED: …, per I-003]` tags point at the operator's ordering rule.
+  - No claim is asserted without one of these.
+- **Phase 2 fails at its first minimum.** No capability cards, no promotion gates, no validation-run template, no capability ledger.
+- **The source ledger contains no market evidence yet.** All ten rows are `disk` sources: evidence of what the line is *built* to do, not of what buyers need. That is why S2 (need) stays PARTIAL on the line.
+
+## Per-phase exit minimums (script output, 2026-09-28)
 
 | Phase | Exit minimum | Result | Missing |
 |---|---|---|---|
-| 0 UNINITIALIZED | company manifest | PASS |  |
-| 0 UNINITIALIZED | service thesis | PASS |  |
-| 0 UNINITIALIZED | buyer map | PASS |  |
-| 0 UNINITIALIZED | initial system rules | PASS |  |
-| 1 FOUNDATION ACTIVE | foundation: customer, evidence-tagged | FAIL | `01-foundation/customer.md` has no `## Claims` section |
-| 1 FOUNDATION ACTIVE | foundation: problem, evidence-tagged | FAIL | `01-foundation/problem.md` has no `## Claims` section |
-| 1 FOUNDATION ACTIVE | foundation: value proposition, evidence-tagged | FAIL | `01-foundation/value-proposition.md` has no `## Claims` section |
-| 1 FOUNDATION ACTIVE | source packet: research plan | FAIL | missing `02-sourcing/research_plan.md` |
-| 1 FOUNDATION ACTIVE | source packet: input registry | FAIL | missing `02-sourcing/input_registry.md` |
-| 1 FOUNDATION ACTIVE | source packet: source ledger (>= 1 row) | FAIL | missing `02-sourcing/source_ledger.md` |
-| 1 FOUNDATION ACTIVE | source packet: >= 1 research dossier | FAIL | missing `02-sourcing/01 - dossiers` |
-| 1 FOUNDATION ACTIVE | source packet: >= 1 carbon input form | PASS |  |
-| 2 CAPABILITY OS BUILDING | capability cards | FAIL | missing `06 - capability/cards` |
-| 2 CAPABILITY OS BUILDING | promotion gates | FAIL | missing `06 - capability/promotion-gates.md` |
-| 2 CAPABILITY OS BUILDING | validation-run template | FAIL | missing `06 - capability/validation-run-template.md` |
-| 2 CAPABILITY OS BUILDING | capability ledger (>= 1 row) | FAIL | missing `06 - capability/capability-ledger.md` |
-| 3 ACQUISITION AND PROOF BUILDING | pipeline ledger | FAIL | missing `07 - acquisition/pipeline-ledger.md` |
-| 3 ACQUISITION AND PROOF BUILDING | cognitive sequence rules | FAIL | missing `07 - acquisition/sequence-rules.md` |
-| 3 ACQUISITION AND PROOF BUILDING | proof system index | FAIL | missing `08 - proof/00 - INDEX.md` |
-| 3 ACQUISITION AND PROOF BUILDING | authority claims | FAIL | missing `08 - proof/authority-claims.md` |
-| 3 ACQUISITION AND PROOF BUILDING | public-proof rules | FAIL | missing `08 - proof/public-proof-rules.md` |
-| 3 ACQUISITION AND PROOF BUILDING | compiler contract | FAIL | missing `00-control/contracts/COMPILER_CONTRACT.md` |
-| 4 DELIVERY AND QUALITY BUILDING | intake form · work packet · delivery packet · service ledger · quality thresholds · QA checklist · review report | FAIL (all 7) | `09 - delivery/` and `10 - quality/` do not exist |
-| 5 CLIENT AND UPGRADE BUILDING | client ledger · client template · upgrade rules with thresholds · rollback rules · upgrade brief template | FAIL (all 5) | `11 - client-state/` and `12 - upgrade/` do not exist |
-| 6 GOVERNANCE INSTALLED | lessons · patterns-to-promote · drift checks · readiness dashboard | FAIL (4) | `13 - memory/` and `14 - governance/` do not exist |
-| 6 GOVERNANCE INSTALLED | phase map | FAIL at first run, PASS once this file exists | `00-control/PHASE_DERIVATION.md` (this file) |
-| 6 GOVERNANCE INSTALLED | exercised matter · exercised quality/proof disposition | FAIL | not machine-checked until a ledger schema exists; nothing has been exercised |
-| 7 GOVERNED LOOP EXERCISED | loop · transition · governance refresh | FAIL (all 3) | nothing has been exercised |
-| 8 LIVE GOVERNED OPERATION | repeated proof · every sequence exercised · no overclaim | FAIL (all 3) | nothing has been exercised |
+| 0 UNINITIALIZED | manifest · service thesis · buyer map · initial system rules | PASS (all 4) | |
+| 1 FOUNDATION ACTIVE | foundation: customer, problem, value proposition, author voice, offer (evidence-tagged) | PASS (all 5) | |
+| 1 FOUNDATION ACTIVE | source packets: research plan · input registry · source ledger (≥ 1 row) · ≥ 1 dossier · ≥ 1 carbon input form | PASS (all 5) | |
+| 2 CAPABILITY OS BUILDING | capability cards | FAIL | `06 - capability/cards` |
+| 2 CAPABILITY OS BUILDING | promotion gates | FAIL | `06 - capability/promotion-gates.md` |
+| 2 CAPABILITY OS BUILDING | validation-run template | FAIL | `06 - capability/validation-run-template.md` |
+| 2 CAPABILITY OS BUILDING | capability ledger (≥ 1 row) | FAIL | `06 - capability/capability-ledger.md` |
+| 3 ACQUISITION AND PROOF BUILDING | pipeline ledger · sequence rules · proof index · authority claims · public-proof rules · compiler contract | FAIL (all 6) | `07 - acquisition/`, `08 - proof/`, `00-control/contracts/COMPILER_CONTRACT.md` |
+| 4–5 | delivery, quality, client and upgrade artifacts | FAIL | `09 - delivery/` to `12 - upgrade/` |
+| 6 | lessons · patterns · drift checks · dashboard | FAIL | `13 - memory/`, `14 - governance/` |
+| 6 | phase map | PASS | this file |
+| 6–8 | every exercised-loop requirement | FAIL | nothing has been exercised |
 
-Phases 4–8 are condensed here; run the script for the row-by-row output. Where the handoff named no folder, the paths come from the gate table in the script (decision D-04, `meta_workspace.md`).
+Run the script for the row-by-row output.
 
-## Knowledge-work override: NOT SATISFIED
+## Gates
 
-This company runs on external research and prompt-derived compilation, so the override applies (handoff §3). None of its three contracts exist: research-dossier, compiler, handoff (`00-control/contracts/`). Consequence: **`03-setup/01 - outputs/` P1–P4 (positioning, pitch stack, website surface, channel copy) are invalid as current-state positioning**, and so is any market-facing claim. They are stubs to be recompiled from dossiers, not drafts to be polished.
-
-## Other claims audited this session
-
-| Claim | Where | Verdict | Evidence |
+| Gate | Operator section | Result | Why |
 |---|---|---|---|
-| "Generated attempt, not a live company" | `00 - ENTRY.md` | **Confirmed.** Stays true until derived phase 8 | this file |
-| Active folder `forge-folder` / `active_cell: forge-cell` | `00 - ENTRY.md`, `manifest.json` | **Unresolved.** No such folder exists (`find -iname '*forge*'` → 0) | gap G-C15 |
-| Media Department COMPLETE | `03 - architecture-governance/DEPARTMENT_REGISTRY.md` | **Unverifiable here.** Not in this repo | register X-04 |
-| Writing Department ACTIVE | registry; `01 - writing-department/00 - ENTRY.md` | **Built, not exercised.** 0 research folders; no voiceprint | gap G-C09 |
-| Content Distribution ACTIVE | registry; `02 - content-distribution/00 - ENTRY.md` | **Built, not exercised.** 0 drafts, 0 publish kits | gap G-C09 |
-| Law OPERATIONAL | registry | **Unverifiable here** | register X-12 |
-| Department-router gap "CLOSED" | `03 - architecture-governance/DEPARTMENT_FIRST_BUSINESS_MODEL.md` | **Not true in this repo.** The script is external | gap G-X06 |
-| `execute.md` gate | `00-control/execute.md` | **Was not a gate** (no operator, handoff §2.7). Operator added in S001: result BLOCKED | gap G-M07 |
-| Departments are linked | the three department folders | **Verified.** `check_links.py`: 0 broken, 0 unregistered | `00-control/tools/check_links.py` |
+| Knowledge-work override | "Knowledge-work override" | NOT SATISFIED | None of the three contracts exist (`00-control/contracts/`). `03-setup/01 - outputs/` P1–P4 stay invalid |
+| Buyer-facing assets (`00-control/execute.md`) | "Buyer-facing gate" | BLOCKED | Foundation now PASS; override contracts and any `live_capability` row are missing |
+| Paid offer (`01-foundation/offer.md`) | "Paid-offer gate" | CLOSED | `08 - proof/PR-001-proof-run.md` does not exist. The first unit is the free proof run |
+
+## Other claims audited (carried from S001; any change noted)
+
+| Claim | Verdict |
+|---|---|
+| "Generated attempt, not a live company" (`00 - ENTRY.md`) | Confirmed. It stays true until derived phase 8 |
+| `forge-folder` / `forge-cell` labels | Unresolved (gap G-C15) |
+| Writing and Content Distribution "ACTIVE" | Built, not exercised: 0 pieces, 0 drafts, 0 kits |
+| Media "COMPLETE" | Refers to the CE workspace. **Here:** `04 - media-department/` exists as intake only and is NOT OPERATIONAL (S002) |
+| Departments linked | Verified: `check_links.py` reports 0 broken and 0 unregistered |
 
 ## Regeneration
 
-1. `python3 00-control/tools/derive_phase.py`. If the derived phase changed, add `--write-manifest`.
-2. Replace the Verdict and per-phase table with the new output, and update "Why" if the triggers changed.
+1. Run `python3 00-control/tools/derive_phase.py`. If the phase changed, add `--write-manifest`.
+2. Run `python3 00-control/tools/line_status.py` and keep the phase-vs-line table above current.
 3. Log the change in `meta_workspace.md` §3.

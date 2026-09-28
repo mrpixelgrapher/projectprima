@@ -105,3 +105,7 @@ Unlike algorithm-driven platforms, the Substack newsletter serves as a direct au
 ## Update rule
 
 When this workflow changes, update this file first, then update `.\..\WORKING_RULES.md` if the change affects a department rule, then update `.\..\00 - ENTRY.md` if the workflow diagram or ancestry changes.
+
+## First-Piece Exemption (appended 2026-09-28, session S002)
+
+**First piece in a new topic** (input I-006): the minimum number of internal links counts only earlier pieces that exist. The first piece in a new topic cluster is excused; the second links to the one before it; from the third piece on, the minimum applies unchanged.

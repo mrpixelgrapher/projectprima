@@ -140,3 +140,7 @@ A blog article is complete only when all of the following are true:
 ## Update rule
 
 When this reframing changes, update this file first, then update `.\WORKING_RULES.md` if a Writing Department rule is affected, then update `.\..\..\..\..\02 - WORKSPACE_META\03 - folder-governance\RESEARCH_FIRST_CONTENT_PRODUCTION.md` if the parent rule needs a new anti-pattern added.
+
+## First-Piece Exemption (appended 2026-09-28, session S002)
+
+**First piece in a new topic** (input I-006): the minimum number of internal links counts only earlier pieces that exist. The first piece in a new topic cluster is excused; the second links to the one before it; from the third piece on, the minimum applies unchanged.

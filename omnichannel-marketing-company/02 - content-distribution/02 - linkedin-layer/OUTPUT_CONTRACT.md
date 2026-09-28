@@ -78,3 +78,11 @@ A LinkedIn derivative is complete only when all of the following are true:
 ## Update rule
 
 When the output contract changes, update this file first, then update `.\WORKFLOW.md` if the workflow steps change, then update `.\..\WORKING_RULES.md` if a department rule is affected, then update `.\..\00 - ENTRY.md` if ancestry changes.
+
+## Local Status (appended 2026-09-28, session S002)
+
+- Activation: **ON, pilot spoke 1** (`.\..\CHANNEL_ACTIVATION.md`).
+- Check 5 (visual asset): **WAITING-ON-PRODUCER**. No image producer exists. Station S6 writes the `asset-1` brief per `.\..\..\04 - media-department\VISUAL_BRIEF_CONTRACT.md`. This check reports WAITING, never PASS, until the brief is ATTACHED.
+- Author: `.\..\..\01-foundation\author-voice.md`. Buyer: `.\..\..\01-foundation\customer.md`.
+- `vertical_tag`: `general`. This company is not one of the listed knowledge verticals, which come from an earlier project; rule 5 above already routes such posts to `general`.
+- `post_type`: use thought-leadership, founder-lesson, framework-driven-educational, case-study-breakdown, contrarian-insight or industry-commentary. `legal-consulting-perspective` belongs to the earlier project and is not used here.

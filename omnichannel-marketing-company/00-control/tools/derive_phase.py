@@ -24,7 +24,10 @@ Check kinds:
   files       folder holds >= N files matching a glob
   rows        markdown table data rows >= N (optionally only rows containing a text)
   tagged      file has a '## Claims' section; every bullet under it carries an evidence
-              tag - [src: ...], [dossier: ...] or [CARBON-BLOCKED ...]; at least one bullet
+              tag - [src: ...], [dossier: ...], [CARBON-BLOCKED ...], [WAITING: ...] or
+              [DEFERRED: ...]; at least one bullet. (Tags name what is missing; phase 1
+              exits when every gap is named. Whether stations are actually FILLED is
+              judged by line_status.py, not here.)
   exercised   an exercised-loop requirement. Never passes by script until its ledger
               schema exists (Build Order Law: the first real ledger row defines the schema).
 """
@@ -37,7 +40,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TAGS = ("[src:", "[dossier:", "[CARBON-BLOCKED")
+TAGS = ("[src:", "[dossier:", "[CARBON-BLOCKED", "[WAITING:", "[DEFERRED:")
 
 PHASE_NAMES = {
     0: "UNINITIALIZED",
@@ -143,6 +146,8 @@ EXIT = {
         ("foundation: customer, evidence-tagged", tagged("01-foundation/customer.md")),
         ("foundation: problem, evidence-tagged", tagged("01-foundation/problem.md")),
         ("foundation: value proposition, evidence-tagged", tagged("01-foundation/value-proposition.md")),
+        ("foundation: author voice, evidence-tagged", tagged("01-foundation/author-voice.md")),
+        ("foundation: offer, evidence-tagged", tagged("01-foundation/offer.md")),
         ("source packet: research plan", exists("02-sourcing/research_plan.md")),
         ("source packet: input registry", exists("02-sourcing/input_registry.md")),
         ("source packet: source ledger (>= 1 row)", rows("02-sourcing/source_ledger.md", 1)),
@@ -257,6 +262,11 @@ def main() -> int:
     for label, ok, why in gate:
         print(f"- {label}: {'PASS' if ok else 'FAIL'}{(' - ' + why) if why else ''}")
     print(f"\nBuyer-facing asset work: {'OPEN' if all(ok for _, ok, _ in gate) else 'BLOCKED'}")
+
+    proof_ok, proof_why = run(contains("08 - proof/PR-001-proof-run.md", "Disposition: PROVEN"))
+    print("\n## Paid-offer gate (operator for `01-foundation/offer.md`, input I-003)\n")
+    print(f"- proof run PR-001 disposition PROVEN: {'PASS' if proof_ok else 'FAIL - ' + proof_why}")
+    print(f"\nPaid offer: {'OPEN - sell framed as validated (one proven run) until a second delivery reconciles' if proof_ok else 'CLOSED - the first unit through the line is the free proof run'}")
 
     if "--write-manifest" in sys.argv:
         manifest["phase"] = derived

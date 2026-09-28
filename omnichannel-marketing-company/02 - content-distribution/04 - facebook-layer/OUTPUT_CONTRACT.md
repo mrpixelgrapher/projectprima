@@ -76,3 +76,10 @@ A Facebook derivative is complete only when all of the following are true:
 ## Update rule
 
 When the output contract changes, update this file first, then update `.\WORKFLOW.md` if the workflow steps change, then update `.\..\WORKING_RULES.md` if a department rule is affected, then update `.\..\00 - ENTRY.md` if ancestry changes.
+
+## Local Status (appended 2026-09-28, session S002)
+
+- Activation: **OFF** until a later opening (`.\..\CHANNEL_ACTIVATION.md`).
+- Check 6 (visual asset): WAITING-ON-PRODUCER once the layer is on (`.\..\..\04 - media-department\VISUAL_BRIEF_CONTRACT.md`).
+- `persona`: `business-owner`, the buyer type in `.\..\..\01-foundation\customer.md`.
+- Author: `.\..\..\01-foundation\author-voice.md`.

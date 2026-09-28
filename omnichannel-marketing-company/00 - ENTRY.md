@@ -80,3 +80,22 @@ Future pipeline folders are declared by the gate table in `00-control/tools/deri
 - **Public content** flows from writing to distribution and ends in a PUBLISH_KIT (`03 - architecture-governance/02 - doctrine-enforcement/OMNICHANNEL_ENFORCEMENT.md`).
 - **External CE references** inside department files resolve through `03 - architecture-governance/EXTERNAL_DEPENDENCY_REGISTER.md`. Open instruction gaps are listed in `03 - architecture-governance/INSTRUCTION_GAP_REGISTER.md`.
 - **Status label.** "Generated attempt, not a live company" (above) stays true until `derive_phase.py` derives phase 8, LIVE GOVERNED OPERATION. The promotion route named in the Runtime Law lives outside this repo (register X-11) and cannot run here, so until it can, the derived phase is the status authority.
+
+## Company Map — Amendment (appended 2026-09-28, session S002)
+
+The folder structure is now read as **one assembly line**: `00-control/ASSEMBLY_LINE.md`. Each station does one job and reads from the stations before it; nothing runs ahead of an unfinished earlier station (input I-007). Cold-boot step 3 gains a third operator:
+
+- `python3 00-control/tools/line_status.py` shows where the line stands. Exit 1 means something skipped ahead.
+
+New since S001:
+
+| Folder / file | Track | What it is | State on 2026-09-28 |
+|---|---|---|---|
+| `00-control/ASSEMBLY_LINE.md` | control | The station table the line operator reads | real |
+| `00-control/carbon-input/CARBON_INPUT_FORM-002.md` | control | The friend's four open facts | OPEN |
+| `01-foundation/author-voice.md` | pipeline, station S1a | Whose voice: name, field, way of talking | PARTIAL: waiting on the friend |
+| `01-foundation/customer.md` | pipeline, station S1b | The buyer type (fixed) plus one real buyer | PARTIAL: waiting on the friend, and on research lane L1 |
+| `01-foundation/problem.md`, `value-proposition.md`, `offer.md` | pipeline, station S2 | The need, the mechanism, and the offer order (free proof run first) | PARTIAL |
+| `02-sourcing/` | pipeline | Research plan, input registry, source ledger, dossier D-001 (staged) | real |
+| `02 - content-distribution/CHANNEL_ACTIVATION.md` | department | Substack hub and LinkedIn on (pilot); everything else off | real |
+| `04 - media-department/` | department, side station M | The image station: intake built, no producer | NOT OPERATIONAL |

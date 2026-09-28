@@ -76,3 +76,7 @@ Where two instruction files disagree, this table gives the operative rule. Each 
 | Facebook length | 300–600 words (WORKING_RULES Rule 5) vs 300–800 (spec 06) | 300–600 words | G-C04 |
 | Internal links | ≥ 2 (Substack contract) vs ≥ 3 (spec 02) | ≥ 2. The first articles in a new cluster cannot meet this; the bootstrap rule is OPEN | G-C05 |
 | Twitter seed | process + contrarian (this ENTRY) vs `process` only (layer contract rule 3) | Metadata `twitter_seed_used` = `process`. The contrarian angle may shape the hook | G-C10 |
+
+## Channel Activation (appended 2026-09-28, session S002)
+
+Which channels are on, in what order, and why: `.\CHANNEL_ACTIVATION.md`. Only the Substack hub and LinkedIn are ON (the pilot). Every channel's image slot is WAITING-ON-PRODUCER (`.\..\04 - media-department\00 - ENTRY.md`).

@@ -83,3 +83,13 @@ A Substack Hub publication is complete only when all of the following are true:
 ## Update rule
 
 When the output contract changes, update this file first, then update `.\WORKFLOW.md` if the workflow steps change, then update `.\..\WORKING_RULES.md` if a department rule is affected, then update `.\..\00 - ENTRY.md` if ancestry changes.
+
+## Local Status (appended 2026-09-28, session S002)
+
+- Activation: **ON, the hub** (`.\..\CHANNEL_ACTIVATION.md`).
+- Check 5 (visual assets): **WAITING-ON-PRODUCER**. No image producer exists. Station S6 writes the `featured` and `inline-N` briefs per `.\..\..\04 - media-department\VISUAL_BRIEF_CONTRACT.md`. This check reports WAITING, never PASS, until they are ATTACHED.
+- Author: `.\..\..\01-foundation\author-voice.md`. `cluster_tag`: the first piece declares it, in the author's field. The initial taxonomy in `.\WORKFLOW.md` lists the earlier project's clusters.
+
+## First-Piece Exemption (appended 2026-09-28, session S002)
+
+**First piece in a new topic** (input I-006): the minimum number of internal links counts only earlier pieces that exist. The first piece in a new topic cluster is excused; the second links to the one before it; from the third piece on, the minimum applies unchanged.

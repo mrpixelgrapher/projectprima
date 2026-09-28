@@ -88,3 +88,14 @@ For each channel, write the URL, or "none", or "create" (meaning: you want it se
 ## When answered
 
 The next session reads this file, marks each question `ANSWERED` in `00-control/STATE.md`, replaces the matching `[CARBON-BLOCKED: F-001 Qn]` tags with `[src: F-001 Qn]`, and logs the answers in `02-sourcing/input_registry.md`.
+
+## Answers Recorded (appended 2026-09-28, session S002)
+
+The operator answered at the level of rules and order (`00-control/source-intent/03 - operator-directives-2026-09-28.md`; logged as I-001 to I-004 in `02-sourcing/input_registry.md`). Status: **PARTIALLY ANSWERED**. The remaining facts are asked in `00-control/carbon-input/CARBON_INPUT_FORM-002.md`.
+
+| Q | Decided | Still open |
+|---|---|---|
+| Q1 friend's role | Closest to option A: **the friend is the author**, the person whose expertise and voice every piece is produced in. Not a client (I-001) | Name, field, writing samples (F-002 Q1, Q2) |
+| Q2 first buyer | **The type is fixed by what's built**: a founder or small-business owner making a professional decision (I-002) | One real buyer (F-002 Q3) |
+| Q3 offer and price | **The order**: a free proof run first, then a paid version priced against that run's recorded cost (I-003) | Price, deliberately deferred until PR-001 is PROVEN |
+| Q4 channels | **The order**: the Substack hub and a LinkedIn spoke first, the rest after the pilot (I-004) | Account URLs and handles (F-002 Q4) |

@@ -71,3 +71,7 @@ And the reason the gate FAILS borderline pieces rather than passing them: the wh
 - Enforces: writing-department `OUTPUT_CONTRACT.md` (the 6 gates) + blueprint `04 - PERFECTIONISM_DOCTRINE.md` (the surplus) + this engine's diamond integrity.
 - On PASS: hand to Content Distribution working company (`.\..\..\02 - content-distribution\`) for the platform decomposition + publish kit (blueprint file 05 omnichannel + spec 03 decomposition).
 - Previous: `04 - PROMPT_voice_humanization.md`. Chain complete.
+
+## Author Binding (appended 2026-09-28, session S002)
+
+For check V1, the "named author" is the one in `.\..\..\01-foundation\author-voice.md`, and the voice reference is that author's voiceprint, `.\..\voiceprints\[author-slug].md`.

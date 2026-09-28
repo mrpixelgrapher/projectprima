@@ -82,3 +82,7 @@ Status caveat for this repo:
 - Media, Law, Design, Branding and Operations have no folder here. Their statuses are CE-workspace claims (`.\EXTERNAL_DEPENDENCY_REGISTER.md` X-04, X-12).
 - Dependency Rule 1 cannot be verified here for Writing or Content Distribution, because Media is absent. Their ACTIVE status means built, not exercised: on 2026-09-25 no research folder or distribution draft exists.
 - The company's capability ledger (build Phase C) becomes the authority on what this company can deliver (`.\INSTRUCTION_GAP_REGISTER.md` G-C09).
+
+## Media Intake Station (2026-09-28, session S002)
+
+This company now has its own image station at `.\..\04 - media-department\`. Status: **NOT OPERATIONAL**. The intake (visual-brief contract, request queue, verification) is built; no producer exists. This does not change the Media row above, which describes the CE workspace. The station counts as operational here only after its first verified render (`.\..\04 - media-department\00 - ENTRY.md`).

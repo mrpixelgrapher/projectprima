@@ -1,7 +1,7 @@
 {
   "company_name": "Omnichannel Marketing Company",
-  "phase": 1,
-  "phase_label": "FOUNDATION ACTIVE",
+  "phase": 2,
+  "phase_label": "CAPABILITY OS BUILDING",
   "active_cell": "forge-cell",
   "phase_previous_claim": {
     "phase": 3,
@@ -11,5 +11,5 @@
   "phase_operator": "python3 00-control/tools/derive_phase.py --write-manifest",
   "phase_derivation": "00-control/PHASE_DERIVATION.md",
   "active_cell_note": "no folder named forge-cell or forge-folder exists in this repo; label kept, unresolved (see 00-control/PHASE_DERIVATION.md)",
-  "phase_derived_on": "2026-09-25"
+  "phase_derived_on": "2026-09-28"
 }

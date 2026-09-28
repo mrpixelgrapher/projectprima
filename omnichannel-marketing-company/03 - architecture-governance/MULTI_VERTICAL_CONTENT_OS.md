@@ -185,3 +185,15 @@ When a new vertical is added to the operating system:
 4. Verify the vertical produces on all 4 platform layers.
 5. Update `.\COMPANY_DEPENDENCY_GRAPH.md` if the vertical maps to a new company.
 6. Update `.\DEPARTMENT_REGISTRY.md` if the vertical adds a new department.
+
+## Vertical: This Company (appended 2026-09-28, session S002)
+
+Added under this file's own Update rule, steps 1–2. The existing rows describe an earlier project's verticals (legal, consulting and others). This company's content is written in the voice of the author in `.\..\01-foundation\author-voice.md`, for the buyer in `.\..\01-foundation\customer.md`.
+
+| Vertical | Substack focus | LinkedIn focus | Twitter/X focus | Threads focus | Facebook focus |
+|---|---|---|---|---|---|
+| Omnichannel marketing for founder-led and small businesses | A research-backed archive in the author's field | Decision-maker visibility with founders (`vertical_tag: general`) | How a marketing system gets built (after the pilot) | What changes for founders (after the pilot) | The `business-owner` persona (after the pilot) |
+
+Ecosystem role: the professional visibility and credibility layer for an audit-first service (`.\..\01-foundation\offer.md`). Content discipline: every claim traces to research, and nothing is written in the earlier project's identity.
+
+Update-rule steps 3–4: the Substack repository is not yet known (CARBON-BLOCKED on F-002 Q4). Production on all four layers is deliberately not yet: only the hub and LinkedIn are on (`.\..\02 - content-distribution\CHANNEL_ACTIVATION.md`).

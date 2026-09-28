@@ -62,3 +62,9 @@ This department now lives inside `omnichannel-marketing-company/` (operator dire
 - Templates: `.\02 - templates\` holds only the research-domain starter. The article skeleton and the decomposition checklist live in `.\..\02 - content-distribution\05 - templates\` (`substack-article-template.md`, `decomposition-checklist.md`).
 - The external references above (Media, KSE Gate 8, the RESEARCH_FIRST rule, Arena) are not in this repo. Use the substitutes in `.\..\03 - architecture-governance\EXTERNAL_DEPENDENCY_REGISTER.md`, rows X-01 to X-04.
 - Status in this repo: built, **not exercised**. No `research-[slug]/` folder and no author voiceprint exist yet. Open gaps: G-C05, G-C07, G-M02, G-M03, G-X04 in `.\..\03 - architecture-governance\INSTRUCTION_GAP_REGISTER.md`.
+
+## Line Position (appended 2026-09-28, session S002)
+
+- This department runs stations S3 (Plan), S4 (Write) and S5 (Check) of `.\..\00-control\ASSEMBLY_LINE.md`. It may not start a piece until S0–S2 are FILLED (`python3 00-control/tools/line_status.py`).
+- Each piece lives in `.\03 - research\research-[slug]\` (decided S002, gap G-C07).
+- The author, and the field every piece is written in: `.\..\01-foundation\author-voice.md`.
